@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, #9000a3, #f334e9);
+    background: linear-gradient(to right, #b005c7, #280137);
     overflow: hidden;
 }
 
@@ -11,7 +11,7 @@ body {
 }
 
 .start, .stop, .pause, .reset {
-    background-color: #ec2cd3;
+    background-color: #2E1A47;
     color: white;
     border: none;
     border-radius: 5px;
@@ -51,7 +51,7 @@ body {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border-color: #ec2cd3;
+    border-color: #ad059f;
     text-align: flex-start;
 }
 

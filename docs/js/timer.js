@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("stop").addEventListener("click", stopTimer);
     document.getElementById("reset").addEventListener("click", resetTimer); 
     document.getElementById("session-length").addEventListener("input", setWorkSession);
+    document.getElementById("session-length").addEventListener("input", validateSessionInput);
 
     updateDisplay();
 
@@ -31,6 +32,17 @@ let seconds = 0;
 let minutes = 0;
 let hours = 0;
 let isBreakSession = false; 
+
+function validateSessionInput() {
+    const sessionLengthInput = document.getElementById("session-length");
+    let value = parseInt(sessionLengthInput.value, 10);
+    
+    if (value > 90) {
+        sessionLengthInput.value = 90;
+    } else if (value < 1 && sessionLengthInput.value !== "") {
+        sessionLengthInput.value = 1;
+    }
+}
 
 function updateSessionType() {
     const sessionType = document.getElementById("session-type");
@@ -125,11 +137,23 @@ function resetTimer() {
 }
 
 function setWorkSession() {
-    const sessionLength = parseInt(document.getElementById("session-length").value, 10);
+    const sessionLengthInput = document.getElementById("session-length");
+    let sessionLength = parseInt(sessionLengthInput.value, 10);
+    
+    if (sessionLength > 90) {
+        sessionLength = 90;
+        sessionLengthInput.value = 90;
+    }
+    
+    if (sessionLength < 1) {
+        sessionLength = 1;
+        sessionLengthInput.value = 1;
+    }
+    
     if (!isNaN(sessionLength) && sessionLength > 0) {
-        minutes = sessionLength;
+        hours = Math.floor(sessionLength / 60);
+        minutes = sessionLength % 60;
         seconds = 0;
-        hours = 0;
         isBreakSession = false;
         updateDisplay();
     }
