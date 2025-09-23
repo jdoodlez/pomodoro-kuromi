@@ -66,7 +66,7 @@ function startTimer() {
                 
                 if (!isBreakSession) {
                     Swal.fire({
-                        imageUrl: '../media/Kuromi-PNG.png', 
+                        imageUrl: './media/Kuromi-PNG.png', 
                         imageHeight: 200,
                         imageWidth: 200,
                         title: "Work session completed! Scoll ka muna sa tiktok",
@@ -80,7 +80,7 @@ function startTimer() {
                     });
                 } else {
                     Swal.fire({
-                        imageUrl: '../media/kuromi-study.png', 
+                        imageUrl: './media/kuromi-study.png', 
                         imageHeight: 200,
                         imageWidth: 200,
                         title: "Break session over! Grind ka na uli.",
@@ -140,7 +140,7 @@ function setBreakSession() {
     
     if (!isNaN(sessionLength) && sessionLength > 0) {
         if (sessionLength <= 25) {
-            seconds = 1;
+            minutes = 5;
         } else {
             minutes = 15;
         }

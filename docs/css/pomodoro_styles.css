@@ -35,6 +35,7 @@ body {
     display: flex;
     justify-content: flex-start;
     height: 350px;
+    margin-top: -30px;
 }
 
 .music-btn {
