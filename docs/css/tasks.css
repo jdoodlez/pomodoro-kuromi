@@ -1,0 +1,184 @@
+/* ============================================================
+   TASKS PAGE — Glassmorphism Kuromi
+   ============================================================ */
+
+.tasks-card {
+    padding: 32px;
+    width: 100%;
+}
+
+.task-input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.task-input {
+    flex: 1;
+    padding: 13px 18px;
+    font-size: 14px;
+    font-family: var(--font-main);
+    border: 2px solid rgba(237, 128, 252, 0.2);
+    border-radius: var(--radius-sm);
+    background: rgba(13, 0, 21, 0.45);
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+.task-input:focus {
+    border-color: var(--kuromi-violet);
+    box-shadow: 0 0 12px rgba(155, 48, 255, 0.15);
+}
+
+.task-input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Filters */
+.task-filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(237, 128, 252, 0.15);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: var(--font-main);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: var(--text-secondary);
+    border-color: rgba(237, 128, 252, 0.35);
+}
+
+.filter-btn.active {
+    background: rgba(155, 48, 255, 0.25);
+    color: var(--text-primary);
+    border-color: var(--kuromi-violet);
+    box-shadow: 0 0 8px rgba(155, 48, 255, 0.15);
+}
+
+/* Task List */
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+    background: rgba(26, 5, 37, 0.3);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.task-item:hover {
+    background: rgba(155, 48, 255, 0.08);
+    border-color: rgba(237, 128, 252, 0.1);
+}
+
+.task-item.completed .task-name {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--kuromi-violet);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.task-name {
+    flex: 1;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 400;
+    word-break: break-word;
+}
+
+.task-edit-input {
+    flex: 1;
+    padding: 8px 12px;
+    background: rgba(13, 0, 21, 0.6);
+    border: 1px solid var(--kuromi-violet);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 15px;
+    outline: none;
+}
+
+.task-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.task-action-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 15px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.task-action-btn:hover {
+    color: var(--text-primary);
+    background: rgba(155, 48, 255, 0.18);
+}
+
+.task-action-btn.delete:hover {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.12);
+}
+
+/* Footer */
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(237, 128, 252, 0.1);
+}
+
+.task-count {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.task-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px 0;
+    font-size: 14px;
+}
+
+.task-empty .empty-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}

@@ -3,13 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pomodoro Timer — Lelay's Kuromi</title>
+        <title>Progress — Lelay's Kuromi Pomodoro</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="./css/shared.css">
-        <link rel="stylesheet" href="./css/timer.css">
+        <link rel="stylesheet" href="./css/calendar.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="./js/shared.js"></script>
-        <script defer src="./js/timer_page.js"></script>
+        <script defer src="./js/calendar.js"></script>
         <script defer src="./js/spotify.js"></script>
     </head>
     <body>
@@ -25,9 +25,7 @@
                 <a href="./calendar.html" class="nav-link">Progress</a>
                 <a href="./tracker.html" class="nav-link">Tracker</a>
             </div>
-            <div class="nav-controls" style="display: flex; align-items: center; gap: 15px;">
-                <div id="live-clock" style="font-size: 1rem; font-weight: bold; color: var(--primary); font-family: monospace;"></div>
-                <button id="toggle-minigame" class="music-btn" style="background: var(--bg-card); color: var(--primary); border: 1px solid var(--primary-low); border-radius: 20px; padding: 5px 15px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"><i class="fa-solid fa-gamepad"></i> Minigame</button>
+            <div class="nav-controls">
                 <audio id="background-music" loop>
                     <source src="./media/kuromi.mp3" type="audio/mpeg">
                 </audio>
@@ -35,23 +33,12 @@
             </div>
         </nav>
 
-        <!-- Minigame Overlay (Hidden by default) -->
-        <div id="minigame-container" class="glass" style="display: none; position: fixed; top: 80px; right: 20px; z-index: 1000; padding: 20px; text-align: center; border-radius: 12px; background: rgba(0, 0, 0, 0.85); border: 1px solid var(--primary-low); box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
-            <h3 style="margin-bottom: 5px; color: var(--primary);">Kuromi Tic-Tac-Toe</h3>
-            <p id="ttt-status" style="font-size: 0.9rem; margin-bottom: 10px; color: #fff;">Your turn (X)</p>
-            <div id="ttt-board" style="display: grid; grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); gap: 5px; justify-content: center; margin-bottom: 15px;">
-                <!-- Cells created via JS -->
-            </div>
-            <button id="reset-ttt" class="btn btn-primary" style="font-size: 0.8rem; padding: 5px 15px;">Restart Game</button>
-        </div>
-
-
         <!-- Page Content -->
         <div class="page-container">
             <div class="page-header">
                 <p id="kuromi-greeting" class="kuromi-greeting"></p>
-                <h1 class="page-title">Pomodoro Timer</h1>
-                <p class="page-subtitle">Stay focused, one session at a time</p>
+                <h1 class="page-title">Progress Calendar</h1>
+                <p class="page-subtitle">Your pomodoro sessions over time — just like GitHub contributions</p>
             </div>
 
             <!-- Kuromi Quote Banner -->
@@ -62,39 +49,38 @@
                 <button class="quote-refresh" title="New quote"><i class="fa-solid fa-sync"></i></button>
             </div>
 
-            <section class="timer-section">
-                <div class="timer-card glass">
-                    <div class="session-status">
-                        <span id="session-type">Work Session</span>
-                    </div>
-
-                    <span id="timer-display">00:25:00</span>
-
-                    <div class="session-config">
-                        <label for="session-task">Working on:</label>
-                        <select class="session-input" id="session-task" style="width: 100%; border-radius: 8px; padding: 8px; background: rgba(0,0,0,0.5); color: white; border: 1px solid rgba(255,255,255,0.2); margin-top: 5px; margin-bottom: 10px; font-family: inherit;">
-                            <option value="">No specific task</option>
-                        </select>
-                    </div>
-
-                    <div class="session-config">
-                        <label for="session-length">Session (min):</label>
-                        <input type="number" class="session-input" id="session-length" value="25" min="1" max="90">
-                    </div>
-
-                    <div class="timer-buttons">
-                        <button id="start" class="btn btn-primary"><i class="fa-solid fa-play"></i> Start</button>
-                        <button id="stop" class="btn btn-ghost"><i class="fa-solid fa-pause"></i> Pause</button>
-                        <button id="reset" class="btn btn-ghost"><i class="fa-solid fa-rotate-right"></i> Reset</button>
-                    </div>
+            <div class="calendar-card glass">
+                <div class="calendar-nav">
+                    <button id="cal-prev" class="cal-nav-btn">&#9664;</button>
+                    <span id="cal-year" class="cal-year"></span>
+                    <button id="cal-next" class="cal-nav-btn">&#9654;</button>
                 </div>
-            </section>
+
+                <div class="calendar-months" id="calendar-months"></div>
+
+                <div class="calendar-wrapper">
+                    <div class="calendar-days-label">
+                        <span>Mon</span><span>Wed</span><span>Fri</span>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+
+                <div class="calendar-legend">
+                    <span class="legend-label">Less</span>
+                    <span class="legend-box" style="background-color: rgba(26,5,37,0.6);"></span>
+                    <span class="legend-box" style="background-color: rgba(91,42,130,0.8);"></span>
+                    <span class="legend-box" style="background-color: rgba(155,48,255,0.75);"></span>
+                    <span class="legend-box" style="background-color: rgba(197,108,240,0.8);"></span>
+                    <span class="legend-box" style="background-color: rgba(237,128,252,0.85);"></span>
+                    <span class="legend-label">More</span>
+                </div>
+            </div>
         </div>
 
         <!-- Kuromi floating decorations -->
         <img src="https://s3.getstickerpack.com/storage/uploads/sticker-pack/kuromi-1/sticker_5.gif?450a9647b06cdad8bd89a9136a7b6d92"
              alt="Kuromi" class="kuromi-float">
-        <img src="./media/Kuromi-PNG.png"
+        <img src="https://i.pinimg.com/originals/e8/89/84/e88984e498667713a1ef901b3c346042.gif"
              alt="Kuromi" class="kuromi-float-right">
 
 

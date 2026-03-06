@@ -1,6 +1,10 @@
 body {
     background: linear-gradient(to right, #b005c7, #280137);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
 
 .buttons {
@@ -104,4 +108,555 @@ body {
     text-align: center;
     color: white;
     font-family: 'Courier New', Courier, monospace;
+}
+
+/* ========== Tabs ========== */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    background: rgba(46, 26, 71, 0.5);
+    padding: 6px;
+    border-radius: 10px;
+}
+
+.tab-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: none;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.tab-btn.active {
+    background: #9b30ff;
+    color: white;
+}
+
+/* ========== Tab Panels ========== */
+.tab-panel {
+    display: none;
+    max-width: 750px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.panel-card {
+    background: rgba(46, 26, 71, 0.65);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(237, 128, 252, 0.25);
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.panel-title {
+    color: #ed80fc;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    margin: 0 0 5px 0;
+    text-align: center;
+}
+
+.panel-subtitle {
+    color: rgba(255, 255, 255, 0.55);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0 18px 0;
+}
+
+/* ========== Task Manager ========== */
+.task-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.task-input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid rgba(237, 128, 252, 0.3);
+    border-radius: 10px;
+    background: rgba(26, 5, 37, 0.6);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+.task-input:focus {
+    border-color: #ed80fc;
+}
+
+.task-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.add-task-btn {
+    padding: 12px 20px;
+    background: #9b30ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    white-space: nowrap;
+}
+
+.add-task-btn:hover {
+    background: #b44dff;
+}
+
+.task-filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.filter-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(237, 128, 252, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: white;
+    border-color: rgba(237, 128, 252, 0.5);
+}
+
+.filter-btn.active {
+    background: rgba(155, 48, 255, 0.35);
+    color: white;
+    border-color: #9b30ff;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.task-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.task-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+    background: rgba(155, 48, 255, 0.4);
+    border-radius: 3px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(237, 128, 252, 0.1);
+    transition: background 0.15s ease;
+}
+
+.task-item:hover {
+    background: rgba(155, 48, 255, 0.08);
+}
+
+.task-item.completed .task-name {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #9b30ff;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.task-name {
+    flex: 1;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    word-break: break-word;
+}
+
+.task-edit-input {
+    flex: 1;
+    padding: 6px 10px;
+    background: rgba(26, 5, 37, 0.8);
+    border: 1px solid #9b30ff;
+    border-radius: 6px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    outline: none;
+}
+
+.task-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.task-action-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px 6px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.task-action-btn:hover {
+    color: white;
+    background: rgba(155, 48, 255, 0.25);
+}
+
+.task-action-btn.delete:hover {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.15);
+}
+
+.task-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(237, 128, 252, 0.15);
+}
+
+#task-count {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+}
+
+.clear-completed-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 107, 107, 0.35);
+    color: rgba(255, 107, 107, 0.7);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clear-completed-btn:hover {
+    background: rgba(255, 107, 107, 0.15);
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+.task-empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+    padding: 30px 0;
+    font-size: 14px;
+}
+
+/* ========== Progress Calendar ========== */
+.calendar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+.cal-nav-btn {
+    background: transparent;
+    border: 1px solid rgba(237, 128, 252, 0.3);
+    color: #ed80fc;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.cal-nav-btn:hover {
+    background: rgba(155, 48, 255, 0.25);
+    border-color: #9b30ff;
+}
+
+.cal-year {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.calendar-months {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    margin-bottom: 4px;
+}
+
+.calendar-months span {
+    color: rgba(255, 255, 255, 0.45);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    width: calc(100% / 12);
+    text-align: center;
+}
+
+.calendar-wrapper {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.calendar-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.calendar-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(155, 48, 255, 0.4);
+    border-radius: 3px;
+}
+
+.calendar-days-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2px 0;
+    width: 30px;
+    flex-shrink: 0;
+}
+
+.calendar-days-label span {
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    height: 14px;
+    line-height: 14px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 14px);
+    grid-auto-flow: column;
+    grid-auto-columns: 14px;
+    gap: 3px;
+    flex: 1;
+}
+
+.calendar-cell {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background-color: #1a0525;
+    position: relative;
+    cursor: default;
+}
+
+.calendar-cell[data-count="1"] { background-color: #5b2a82; }
+.calendar-cell[data-count="2"] { background-color: #9b30ff; }
+.calendar-cell[data-count="3"] { background-color: #c56cf0; }
+.calendar-cell[data-count="4"] { background-color: #ed80fc; }
+
+.calendar-cell .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2E1A47;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    border: 1px solid rgba(237, 128, 252, 0.3);
+}
+
+.calendar-cell:hover .tooltip {
+    display: block;
+}
+
+.calendar-legend {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+}
+
+.legend-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+}
+
+.legend-box {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* ========== Tracker / Stats ========== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.stat-card {
+    background: rgba(26, 5, 37, 0.6);
+    border: 1px solid rgba(237, 128, 252, 0.15);
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+    transition: border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    border-color: rgba(237, 128, 252, 0.4);
+}
+
+.stat-value {
+    color: #ed80fc;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.55);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+}
+
+.session-log {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.session-log::-webkit-scrollbar {
+    width: 6px;
+}
+
+.session-log::-webkit-scrollbar-thumb {
+    background: rgba(155, 48, 255, 0.4);
+    border-radius: 3px;
+}
+
+.session-log-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(237, 128, 252, 0.08);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+}
+
+.session-log-item .log-date {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+}
+
+.session-log-item .log-duration {
+    color: #ed80fc;
+    font-weight: bold;
+}
+
+.session-log-empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+    padding: 30px 0;
+    font-size: 14px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    #timer-display {
+        font-size: 80px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tab-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .calendar-grid {
+        grid-auto-columns: 12px;
+        grid-template-rows: repeat(7, 12px);
+        gap: 2px;
+    }
+
+    .calendar-cell {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,0 +1,877 @@
+/* ============================================================
+   SHARED BASE — Kuromi Glassmorphism Theme
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --kuromi-dark: #0d0015;
+    --kuromi-deep: #1a0525;
+    --kuromi-purple: #2E1A47;
+    --kuromi-violet: #9b30ff;
+    --kuromi-lavender: #c56cf0;
+    --kuromi-pink: #ed80fc;
+    --kuromi-hot: #b005c7;
+    --glass-bg: rgba(30, 10, 50, 0.45);
+    --glass-border: rgba(237, 128, 252, 0.18);
+    --glass-blur: 18px;
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.65);
+    --text-muted: rgba(255, 255, 255, 0.38);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --font-main: 'Poppins', 'Segoe UI', sans-serif;
+    --font-mono: 'Courier New', Courier, monospace;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--kuromi-dark);
+    position: relative;
+    cursor: url('https://cdn.custom-cursor.com/db/8220/32/sanrio-kuromi-cursor.png'), auto;
+}
+
+a, button, input[type="submit"], input[type="button"], label, select, .nav-link, .brand-icon {
+    cursor: url('https://cdn.custom-cursor.com/db/8219/32/sanrio-kuromi-pointer.png'), pointer !important;
+}
+
+::selection {
+    background: var(--kuromi-pink);
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--kuromi-deep);
+    border-left: 1px solid rgba(237, 128, 252, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--kuromi-violet), var(--kuromi-hot));
+    border-radius: 6px;
+    border: 2px solid var(--kuromi-deep);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--kuromi-lavender), var(--kuromi-pink));
+}
+
+/* Animated gradient background with mesh */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(155, 48, 255, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(176, 5, 199, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(237, 128, 252, 0.08) 0%, transparent 70%),
+        linear-gradient(rgba(237, 128, 252, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237, 128, 252, 0.03) 1px, transparent 1px),
+        linear-gradient(135deg, #0d0015 0%, #1a0525 30%, #2E1A47 60%, #1a0525 80%, #0d0015 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px, 100% 100%;
+    z-index: -2;
+    animation: bgShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgShift {
+    0% { opacity: 1; }
+    50% { opacity: 0.85; }
+    100% { opacity: 1; }
+}
+
+/* Floating decorative orbs */
+body::after {
+    content: '';
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(155, 48, 255, 0.12) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    z-index: -1;
+    animation: orbFloat 15s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 40px) scale(1.1); }
+}
+
+/* ========== Glassmorphism Card ========== */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass::before {
+    content: '🎀';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 28px;
+    opacity: 0.15;
+    transform: rotate(15deg);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(237, 128, 252, 0.05), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+}
+
+.glass:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(155, 48, 255, 0.25);
+    border-color: rgba(237, 128, 252, 0.4);
+}
+
+.glass:hover::before {
+    top: 5px;
+    right: 5px;
+    opacity: 0.8;
+    transform: rotate(0deg) scale(1.1);
+    filter: drop-shadow(0 0 5px var(--kuromi-pink));
+}
+
+.glass:hover::after {
+    left: 150%;
+}
+
+.glass-sm {
+    background: rgba(26, 5, 37, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(237, 128, 252, 0.12);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ========== Navigation Bar ========== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    background: rgba(13, 0, 21, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(237, 128, 252, 0.12);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+.nav-brand .brand-icon {
+    font-size: 22px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 6px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(155, 48, 255, 0.12);
+    border-color: rgba(237, 128, 252, 0.15);
+}
+
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(155, 48, 255, 0.25);
+    border-color: var(--kuromi-violet);
+    box-shadow: 0 0 12px rgba(155, 48, 255, 0.2);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.music-btn {
+    background: rgba(155, 48, 255, 0.15);
+    border: 1px solid rgba(237, 128, 252, 0.2);
+    color: var(--text-secondary);
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: var(--font-main);
+    transition: all 0.25s ease;
+}
+
+.music-btn:hover {
+    color: var(--text-primary);
+    background: rgba(155, 48, 255, 0.3);
+    border-color: var(--kuromi-violet);
+}
+
+/* ========== Page Layout ========== */
+.page-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--kuromi-pink);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* ========== Kuromi Decoration ========== */
+.kuromi-float {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    width: 130px;
+    height: auto;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.85;
+    animation: kuromiWiggle 4s ease-in-out infinite, floatHover 6s ease-in-out infinite alternate;
+    filter: drop-shadow(0 4px 20px rgba(155, 48, 255, 0.5));
+}
+
+.kuromi-float-right {
+    position: fixed;
+    bottom: 96px;
+    right: 20px;
+    width: 110px;
+    height: auto;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.75;
+    animation: kuromiWiggle2 5s ease-in-out infinite, floatHover 7s ease-in-out infinite alternate-reverse;
+    filter: drop-shadow(0 4px 20px rgba(237, 128, 252, 0.45));
+}
+
+@keyframes floatHover {
+    0% { filter: drop-shadow(0 4px 20px rgba(155, 48, 255, 0.5)); }
+    100% { filter: drop-shadow(0 12px 30px rgba(237, 128, 252, 0.8)); }
+}
+
+@keyframes kuromiWiggle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(2deg); }
+    75% { transform: translateY(4px) rotate(-2deg); }
+}
+
+@keyframes kuromiWiggle2 {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    33% { transform: translateY(-6px) rotate(-3deg) scale(1.03); }
+    66% { transform: translateY(3px) rotate(2deg) scale(0.98); }
+}
+
+/* ========== Falling Sparkles/Bats ============ */
+.kuromi-falling-sparkle {
+    position: fixed;
+    top: -50px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    animation: fallDown linear infinite;
+    filter: drop-shadow(0 0 8px rgba(237, 128, 252, 0.8));
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) scale(1.2);
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* ========== Kuromi Quote Banner ========== */
+.kuromi-quote-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    max-width: 700px;
+    margin: 0 auto 28px;
+    padding: 18px 24px;
+    background: rgba(46, 26, 71, 0.4);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(237, 128, 252, 0.15);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 20px rgba(155, 48, 255, 0.1);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.kuromi-quote-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--kuromi-violet), var(--kuromi-pink), var(--kuromi-violet), transparent);
+    opacity: 0.6;
+}
+
+.kuromi-quote-banner.quote-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote-kuromi-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: rgba(155, 48, 255, 0.15);
+    padding: 4px;
+    border: 2px solid rgba(237, 128, 252, 0.2);
+    animation: avatarPulse 3s ease-in-out infinite;
+}
+
+@keyframes avatarPulse {
+    0%, 100% { border-color: rgba(237, 128, 252, 0.2); }
+    50% { border-color: rgba(237, 128, 252, 0.5); }
+}
+
+.quote-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.quote-icon {
+    font-size: 18px;
+    margin-right: 6px;
+}
+
+.quote-text {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.quote-refresh {
+    background: transparent;
+    border: 1px solid rgba(237, 128, 252, 0.15);
+    color: var(--text-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.quote-refresh:hover {
+    color: var(--kuromi-pink);
+    background: rgba(155, 48, 255, 0.15);
+    border-color: var(--kuromi-violet);
+    transform: rotate(180deg);
+}
+
+/* ========== Kuromi Greeting ========== */
+.kuromi-greeting {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.greeting-emoji {
+    font-size: 15px;
+    margin-right: 4px;
+}
+
+/* ========== Kuromi Decorative Sparkles ========== */
+.kuromi-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.12;
+}
+
+.sparkle-1 {
+    top: 15%;
+    left: 8%;
+    font-size: 24px;
+    animation: sparkleFloat 6s ease-in-out infinite;
+}
+
+.sparkle-2 {
+    top: 30%;
+    right: 5%;
+    font-size: 18px;
+    animation: sparkleFloat 8s ease-in-out infinite reverse;
+}
+
+.sparkle-3 {
+    bottom: 25%;
+    left: 15%;
+    font-size: 20px;
+    animation: sparkleFloat 7s ease-in-out infinite 1s;
+}
+
+.sparkle-4 {
+    top: 60%;
+    right: 12%;
+    font-size: 16px;
+    animation: sparkleFloat 9s ease-in-out infinite 2s;
+}
+
+@keyframes sparkleFloat {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.12; }
+    50% { transform: translateY(-15px) scale(1.2); opacity: 0.22; }
+}
+
+/* ========== Buttons ========== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.btn:active::after {
+    width: 200px;
+    height: 200px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--kuromi-violet), var(--kuromi-lavender));
+    color: white;
+    box-shadow: 0 4px 15px rgba(155, 48, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(155, 48, 255, 0.5);
+    background: linear-gradient(135deg, var(--kuromi-lavender), var(--kuromi-pink));
+}
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(155, 48, 255, 0.45);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid rgba(237, 128, 252, 0.2);
+}
+
+.btn-ghost:hover {
+    color: var(--text-primary);
+    background: rgba(155, 48, 255, 0.12);
+    border-color: rgba(237, 128, 252, 0.35);
+}
+
+.btn-danger {
+    background: transparent;
+    color: rgba(255, 107, 107, 0.7);
+    border: 1px solid rgba(255, 107, 107, 0.25);
+}
+
+.btn-danger:hover {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.12);
+    border-color: rgba(255, 107, 107, 0.5);
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(155, 48, 255, 0.35);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(155, 48, 255, 0.55);
+}
+
+
+
+/* ========== Spotify Miniplayer ========== */
+.spotify-toggle {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(30, 215, 96, 0.15);
+    border: 2px solid rgba(30, 215, 96, 0.3);
+    color: #1DB954;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(30, 215, 96, 0.15);
+}
+
+.spotify-toggle:hover {
+    transform: scale(1.1);
+    background: rgba(30, 215, 96, 0.25);
+    box-shadow: 0 6px 24px rgba(30, 215, 96, 0.25);
+}
+
+.spotify-toggle.active {
+    background: rgba(30, 215, 96, 0.25);
+    border-color: #1DB954;
+}
+
+.spotify-panel {
+    position: fixed;
+    bottom: 88px;
+    left: 24px;
+    width: 340px;
+    background: rgba(13, 0, 21, 0.94);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(30, 215, 96, 0.2);
+    border-radius: 18px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), 0 0 20px rgba(30, 215, 96, 0.08);
+    z-index: 2001;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.spotify-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.spotify-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(46, 26, 71, 0.5);
+    border-bottom: 1px solid rgba(30, 215, 96, 0.12);
+}
+
+.spotify-header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1DB954;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.spotify-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spotify-close:hover {
+    color: #1DB954;
+    background: rgba(30, 215, 96, 0.1);
+}
+
+.spotify-controls {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.spotify-playlist-select {
+    width: 100%;
+    background: rgba(13, 0, 21, 0.7);
+    border: 1px solid rgba(30, 215, 96, 0.15);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+.spotify-playlist-select:focus {
+    border-color: #1DB954;
+}
+
+.spotify-playlist-select option {
+    background: #1a0525;
+    color: var(--text-primary);
+}
+
+.spotify-custom-row {
+    display: none;
+    gap: 6px;
+    align-items: center;
+}
+
+.spotify-custom-row input {
+    flex: 1;
+    background: rgba(13, 0, 21, 0.7);
+    border: 1px solid rgba(30, 215, 96, 0.15);
+    border-radius: 8px;
+    padding: 7px 10px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 12px;
+    outline: none;
+}
+
+.spotify-custom-row input::placeholder {
+    color: var(--text-muted);
+}
+
+.spotify-custom-row input:focus {
+    border-color: #1DB954;
+}
+
+.spotify-custom-row button {
+    background: #1DB954;
+    border: none;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--font-main);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.spotify-custom-row button:hover {
+    background: #1ed760;
+}
+
+.spotify-embed {
+    padding: 0 10px 10px;
+}
+
+.spotify-embed iframe {
+    border-radius: 12px;
+    width: 100%;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 16px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-link {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    .page-container {
+        padding: 20px 14px 50px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .kuromi-float {
+        width: 80px;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .kuromi-float-right {
+        width: 65px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .kuromi-quote-banner {
+        padding: 14px 16px;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .quote-kuromi-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .quote-text {
+        font-size: 13px;
+    }
+
+    .kuromi-sparkle { display: none; }
+
+    .spotify-toggle {
+        width: 44px;
+        height: 44px;
+        bottom: 18px;
+        left: 16px;
+        font-size: 20px;
+    }
+
+    .spotify-panel {
+        bottom: 72px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-brand {
+        font-size: 16px;
+    }
+
+    .kuromi-quote-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
